@@ -1,33 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.pruebatecnica.aseo.models;
 
-import jakarta.persistence.Entity;
-
-
-
+import jakarta.persistence.*;
 
 /**
  *
  * @author david
  */
-
+@Entity
+@Table(name = "cliente")
 
 public class Cliente {
-    private int id_cliente;
+
+    @Id
+    private Long id_cliente;
+
     private String nombre;
     private String apellido;
     private String fecha_nacimiento;
     private int telefono;
     private String email;
 
-    public int getId_cliente() {
+    public Long getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(int id_cliente) {
+    public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
 
@@ -70,25 +67,4 @@ public class Cliente {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public Cliente() {
-        this.id_cliente = id_cliente;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.telefono = telefono;
-        this.email = email;
-    }
-    
-
-    public Cliente(int id_cliente, String nombre, String apellido, String fecha_nacimiento, int telefono, String email) {
-        this.id_cliente = id_cliente;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.telefono = telefono;
-        this.email = email;
-    }
-    
-    
 }

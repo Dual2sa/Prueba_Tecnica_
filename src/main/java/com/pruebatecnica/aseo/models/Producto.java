@@ -8,17 +8,30 @@ import jakarta.persistence.*;
  *
  * @author david
  */
-
+@Entity
+@Table(name = "producto")
 public class Producto {
-    private int id_producto;
+     @Id
+    private Long  id_producto;
+     
     private String nombre;
     private float precio;
 
-    public int getId_producto() {
+     private int stock;
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+     
+    public Long getId_producto() {
         return id_producto;
     }
 
-    public void setId_producto(int id_producto) {
+    public void setId_producto(Long id_producto) {
         this.id_producto = id_producto;
     }
 
@@ -38,16 +51,6 @@ public class Producto {
         this.precio = precio;
     }
 
-    public Producto(int id_producto, String nombre, float precio) {
-        this.id_producto = id_producto;
-        this.nombre = nombre;
-        this.precio = precio;
-    }
-
-    public Producto() {
-        this.id_producto = id_producto;
-        this.nombre = nombre;
-        this.precio = precio;
-    }
+  
     
 }
