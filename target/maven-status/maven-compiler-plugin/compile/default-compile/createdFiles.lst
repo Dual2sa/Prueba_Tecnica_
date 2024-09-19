@@ -1,0 +1,6 @@
+com\pruebatecnica\aseo\model\Producto.class
+com\pruebatecnica\aseo\AseoApplication.class
+com\pruebatecnica\aseo\model\Cliente.class
+com\pruebatecnica\aseo\model\Factura.class
+com\pruebatecnica\aseo\model\Detalle_Factura.class
+com\pruebatecnica\aseo\controller\Control.class
