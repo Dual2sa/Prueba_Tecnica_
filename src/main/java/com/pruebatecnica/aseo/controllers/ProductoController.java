@@ -31,7 +31,7 @@ public class ProductoController {
     private ProductoRepository productoRepository;
      
       @GetMapping
-    public List<Producto> getAllClientes(){
+    public List<Producto> getAllProductos(){
      return productoRepository.findAll();
      
     }

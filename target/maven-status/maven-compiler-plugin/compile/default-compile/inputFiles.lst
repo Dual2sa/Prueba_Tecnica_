@@ -4,8 +4,10 @@ C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebate
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\controllers\FacturaController.java
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\controllers\ProductoController.java
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\models\Cliente.java
-C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\models\Detalle_Factura.java
+C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\models\DetalleFactura.java
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\models\Factura.java
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\models\Producto.java
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\repostories\ClienteRepository.java
+C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\repostories\DetalleFacturaRepository.java
+C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\repostories\FacturaRepository.java
 C:\Users\david\OneDrive\Desktop\prueba\Prueba_Tecnica\src\main\java\com\pruebatecnica\aseo\repostories\ProductoRepository.java

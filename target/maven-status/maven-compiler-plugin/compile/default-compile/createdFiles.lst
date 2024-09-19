@@ -1,11 +1,13 @@
 com\pruebatecnica\aseo\repostories\ProductoRepository.class
-com\pruebatecnica\aseo\AseoApplication.class
 com\pruebatecnica\aseo\models\Factura.class
 com\pruebatecnica\aseo\models\Producto.class
-com\pruebatecnica\aseo\models\Detalle_Factura.class
 com\pruebatecnica\aseo\controllers\ClienteController.class
+com\pruebatecnica\aseo\repostories\FacturaRepository.class
+com\pruebatecnica\aseo\models\Cliente.class
+com\pruebatecnica\aseo\models\DetalleFactura.class
+com\pruebatecnica\aseo\AseoApplication.class
+com\pruebatecnica\aseo\repostories\DetalleFacturaRepository.class
 com\pruebatecnica\aseo\controllers\DetalleFacturaController.class
 com\pruebatecnica\aseo\controllers\ProductoController.class
 com\pruebatecnica\aseo\controllers\FacturaController.class
-com\pruebatecnica\aseo\models\Cliente.class
 com\pruebatecnica\aseo\repostories\ClienteRepository.class

@@ -3,30 +3,37 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.pruebatecnica.aseo.models;
+
 import jakarta.persistence.*;
+
 /**
  *
  * @author david
  */
-
+@Entity
+@Table(name = "factura")
 public class Factura {
-     private int num_factura;
-     private int id_cliente;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long num_factura;
+
+    private Long id_cliente;
     private String fecha;
 
-    public int getNum_factura() {
+    public Long getNum_factura() {
         return num_factura;
     }
 
-    public void setNum_factura(int num_factura) {
+    public void setNum_factura(Long num_factura) {
         this.num_factura = num_factura;
     }
 
-    public int getId_cliente() {
+    public Long getId_cliente() {
         return id_cliente;
     }
 
-    public void setId_cliente(int id_cliente) {
+    public void setId_cliente(Long id_cliente) {
         this.id_cliente = id_cliente;
     }
 
@@ -38,16 +45,4 @@ public class Factura {
         this.fecha = fecha;
     }
 
-    public Factura(int num_factura, int id_cliente, String fecha) {
-        this.num_factura = num_factura;
-        this.id_cliente = id_cliente;
-        this.fecha = fecha;
-    }
-
-    public Factura() {
-        this.num_factura = num_factura;
-        this.id_cliente = id_cliente;
-        this.fecha = fecha;
-    }
-    
 }

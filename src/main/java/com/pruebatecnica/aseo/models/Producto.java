@@ -12,6 +12,7 @@ import jakarta.persistence.*;
 @Table(name = "producto")
 public class Producto {
      @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  id_producto;
      
     private String nombre;
