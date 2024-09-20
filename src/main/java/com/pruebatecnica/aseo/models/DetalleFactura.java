@@ -11,6 +11,7 @@ import jakarta.persistence.*;
 @Entity
 @Table (name="detalle")
 public class DetalleFactura {
+     //Atributos Clase DetalleFactura
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long num_detalle;

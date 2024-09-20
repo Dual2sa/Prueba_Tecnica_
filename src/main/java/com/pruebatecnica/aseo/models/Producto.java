@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.pruebatecnica.aseo.models;
 import jakarta.persistence.*;
 /**
@@ -11,6 +8,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "producto")
 public class Producto {
+     //Atributos Clase Factura
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  id_producto;

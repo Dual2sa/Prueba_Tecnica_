@@ -16,6 +16,7 @@ import org.springframework.data.repository.query.Param;
  * @author david
  */
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
+    //Consultas SQL Para traer todas las facturas de determiando cliente
  @Query("SELECT f FROM Factura f WHERE f.id_cliente = :id_cliente")
     List<Factura> findByIdCliente(@Param("id_cliente") Long id_cliente);
 }

@@ -29,38 +29,41 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductoController {
      @Autowired
     private ProductoRepository productoRepository;
-     
+     //GET traer todos los Productos
       @GetMapping
     public List<Producto> getAllProductos(){
      return productoRepository.findAll();
      
     }
+     //GET traer producto por id_producto tomado desde URL
     @GetMapping("/{id_producto}")
     public ResponseEntity<Producto> getProductoById(@PathVariable Long id_producto){
         Optional<Producto> producto= productoRepository.findById(id_producto);
         return producto.map(ResponseEntity::ok).orElseGet(()->ResponseEntity.notFound().build());
     }
-     
-    @PostMapping()
+       //POST  crear nuevo  producto 
+    @PostMapping("/crear")
     public ResponseEntity<Producto> createProducto(@RequestBody Producto producto) {
         Producto saveProducto = productoRepository.save(producto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saveProducto);
 
     }
-    
+    //DELETE borrar producto por id_producto
     @DeleteMapping("/{id_producto}")
-    public ResponseEntity<Void> deleteProducto(@PathVariable Long id_producto){
+    public ResponseEntity<?> deleteProducto(@PathVariable Long id_producto){
         if(!productoRepository.existsById(id_producto)){
-            return ResponseEntity.notFound().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Producto con id " + id_producto + " no existe");
         }
         productoRepository.deleteById(id_producto);
         return ResponseEntity.noContent().build();
     }
-    
+    //PUT actualizar producto por id_producto
     @PutMapping("/{id_producto}")
-    public ResponseEntity<Producto> updateCliente(@PathVariable Long id_producto, @RequestBody Producto updateCliente ){
+    public ResponseEntity<?> updateProducto(@PathVariable Long id_producto, @RequestBody Producto updateCliente ){
         if(!productoRepository.existsById(id_producto)){
-            return ResponseEntity.notFound().build();
+           return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Producto con id " + id_producto + " no existe");
         }
         updateCliente.setId_producto(id_producto);
        Producto saveCliente= productoRepository.save(updateCliente);

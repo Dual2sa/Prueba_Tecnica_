@@ -15,9 +15,11 @@ import org.springframework.data.repository.query.Param;
  * @author david
  */
 public interface DetalleFacturaRepository extends JpaRepository<DetalleFactura, Long>{
+    //Consultas SQL Para traer todos los registros con id_factura determinada
      @Query("SELECT d FROM DetalleFactura d WHERE d.id_factura = :id_factura")
     List<DetalleFactura> findByIdFactura(@Param("id_factura") Long id_factura);
     
+    //Consultas SQL Para traer todos los registros con id_producto determinado
     @Query("SELECT d FROM DetalleFactura d WHERE d.id_producto = :id_producto")
     List<DetalleFactura> findByIdProducto(@Param("id_producto") Long id_producto);
 }

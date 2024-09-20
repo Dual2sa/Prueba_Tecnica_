@@ -13,7 +13,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "factura")
 public class Factura {
-
+ //Atributos Clase Factura
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long num_factura;

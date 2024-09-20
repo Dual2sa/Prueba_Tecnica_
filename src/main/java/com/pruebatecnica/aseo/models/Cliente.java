@@ -13,11 +13,12 @@ public class Cliente {
 
     @Id
     private Long id_cliente;
-
+    //Atributos Clase Cliente
     private String nombre;
     private String apellido;
     private String fecha_nacimiento;
-    private int telefono;
+    private Long telefono;
+    
     private String email;
 
     public Long getId_cliente() {
@@ -52,11 +53,11 @@ public class Cliente {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public int getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
