@@ -45,4 +45,6 @@ public class Factura {
         this.fecha = fecha;
     }
 
+   
+
 }

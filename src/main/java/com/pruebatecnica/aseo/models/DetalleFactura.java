@@ -60,6 +60,8 @@ public class DetalleFactura {
         this.precio = precio;
     }
 
+   
+
     
    
 }
