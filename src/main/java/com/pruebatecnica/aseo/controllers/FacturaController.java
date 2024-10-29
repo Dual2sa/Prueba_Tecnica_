@@ -8,6 +8,10 @@ import com.pruebatecnica.aseo.repostories.ClienteRepository;
 import com.pruebatecnica.aseo.repostories.DetalleFacturaRepository;
 import com.pruebatecnica.aseo.repostories.FacturaRepository;
 import com.pruebatecnica.aseo.repostories.ProductoRepository;
+import com.pruebatecnica.aseo.services.FacturaServices;
+import com.pruebatecnica.aseo.services.ClienteServices;
+import com.pruebatecnica.aseo.services.DetalleFacturaServices;
+import com.pruebatecnica.aseo.services.ProductoServices;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,34 +39,31 @@ import org.springframework.web.bind.annotation.RestController;
 public class FacturaController {
 
     @Autowired
-    private FacturaRepository facturaRepository;
-
-    @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Autowired
-    private DetalleFacturaRepository detalleFacturaRepository;
-
-    @Autowired
-    private ProductoRepository productoRepository;
+    private FacturaServices facturaServices;
+ @Autowired
+    private ClienteServices clienteServices;
+     @Autowired
+    private ProductoServices productoServices;
+  @Autowired
+    private DetalleFacturaServices detalleFacturaServices;
 
     @GetMapping
     // Obtener todas las facturas
     public List<Factura> getAllFacturas() {
-        return facturaRepository.findAll();
+        return facturaServices.getAllFacturas();
     }
     //GET Obtener factura por num_factura tomado desde URL
 
     @GetMapping("/factura/{num_factura}")
     public ResponseEntity<Factura> getFacturaById(@PathVariable Long num_factura) {
-        Optional<Factura> factura = facturaRepository.findById(num_factura);
+        Optional<Factura> factura = facturaServices.getFacturaById(num_factura);
         return factura.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     //GET Obtener factura por id_cliente  tomado desde URL
 
     @GetMapping("/cliente/{id_cliente}")
     public ResponseEntity<List<Factura>> getFacturasByClienteId(@PathVariable Long id_cliente) {
-        List<Factura> facturas = facturaRepository.findByIdCliente(id_cliente);
+        List<Factura> facturas = facturaServices.getFacturaByClienteId(id_cliente);
         if (facturas.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -75,14 +76,14 @@ public class FacturaController {
             @RequestBody Factura factura) {
 
         // Verificar si el cliente existe
-        Optional<Cliente> cliente = clienteRepository.findById(id_cliente);
+        Optional<Cliente> cliente = clienteServices.getClienteById(id_cliente);
         if (!cliente.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Cliente con id " + id_cliente + " no encontrado.");
         }
 
         // Verificar si el producto existe
-        Optional<Producto> producto = productoRepository.findById(id_producto);
+        Optional<Producto> producto = productoServices.getProductoById(id_producto);
         if (!producto.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Producto con id " + id_producto + " no encontrado.");
@@ -101,7 +102,7 @@ public class FacturaController {
 
         // Asignar el id_cliente a la factura
         factura.setId_cliente(id_cliente);
-        Factura nuevaFactura = facturaRepository.save(factura);
+        Factura nuevaFactura = facturaServices.createFactura(factura);
 
         // Crear el detalle asociado a la factura
         DetalleFactura detalle = new DetalleFactura();
@@ -114,8 +115,8 @@ public class FacturaController {
         detalle.setPrecio(total);
 
         productoEncontrado.setStock(productoEncontrado.getStock() - cantidad);
-        productoRepository.save(productoEncontrado);
-        detalleFacturaRepository.save(detalle);
+        productoServices.createProducto(productoEncontrado);
+        detalleFacturaServices.createDetalle(detalle);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Factura y Detalle creados correctamente con un total de " + total);
         response.put("factura", nuevaFactura);
@@ -126,23 +127,22 @@ public class FacturaController {
 
     @DeleteMapping("/{num_factura}")
     public ResponseEntity<?> deleteFactura(@PathVariable Long num_factura) {
-        if (!facturaRepository.existsById(num_factura)) {
+        if (!facturaServices.existsById(num_factura)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Factura  con id " + num_factura + " no existe.");
         }
-        facturaRepository.deleteById(num_factura);
+        facturaServices.deleteFactura(num_factura);
         return ResponseEntity.noContent().build();
     }
     // PUT actualizarr factura por num_factura tomado desde la URL
 
     @PutMapping("/{num_factura}")
     public ResponseEntity<?> updateFactura(@PathVariable Long num_factura, @RequestBody Factura updateFactura) {
-        if (!facturaRepository.existsById(num_factura)) {
+        if (!facturaServices.existsById(num_factura)) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Factura  con id " + num_factura + " no existe.");
         }
-        updateFactura.setNum_factura(num_factura);
-        Factura saveFactura = facturaRepository.save(updateFactura);
+        Factura saveFactura = facturaServices.updateFactura(num_factura, updateFactura);
         return ResponseEntity.ok(saveFactura);
     }
 

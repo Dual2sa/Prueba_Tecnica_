@@ -10,6 +10,7 @@ import com.pruebatecnica.aseo.repostories.ClienteRepository;
 import com.pruebatecnica.aseo.repostories.DetalleFacturaRepository;
 import com.pruebatecnica.aseo.repostories.FacturaRepository;
 import com.pruebatecnica.aseo.repostories.ProductoRepository;
+import com.pruebatecnica.aseo.services.DetalleFacturaServices;
 import java.util.List;
 
 import java.util.Optional;
@@ -34,34 +35,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/detalles")
 public class DetalleFacturaController {
 
-    @Autowired
-    private ProductoRepository productoRepository;
-            
-    @Autowired
-    private ClienteRepository clienteRepository;
+   
     
     @Autowired
-    private DetalleFacturaRepository detalleFacturaRepository;
+    private DetalleFacturaServices detalleFacturaServices;
 
-    @Autowired
-    private FacturaRepository facturaRepository;
+    
     //Get para traer todos los datos
     @GetMapping
     public List<DetalleFactura> getAllDetalles() {
-        return detalleFacturaRepository.findAll();
+        return detalleFacturaServices.getAllDetalles();
     }
 
     //Get para traer todos los datos de un determinado detalle
     @GetMapping("/{num_detalle}")
     public ResponseEntity<DetalleFactura> getDetallebyId(@PathVariable Long num_detalle) {
-        Optional<DetalleFactura> detalleFactura = detalleFacturaRepository.findById(num_detalle);
+        Optional<DetalleFactura> detalleFactura = detalleFacturaServices.getDetalleById(num_detalle);
         return detalleFactura.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 //Get para traer todos los datos de un determinado detalle usando id_factura
 
     @GetMapping("/factura/{id_factura}")
     public ResponseEntity<List<DetalleFactura>> getDetallesByFacturaId(@PathVariable Long id_factura) {
-        List<DetalleFactura> detalles = detalleFacturaRepository.findByIdFactura(id_factura);
+        List<DetalleFactura> detalles = detalleFacturaServices.getDetalleByIdFactura(id_factura);
         if (detalles.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -71,7 +67,7 @@ public class DetalleFacturaController {
     //Get para traer todos los datos de un determinado detalle usando id_producto
     @GetMapping("/producto/{id_producto}")
     public ResponseEntity<List<DetalleFactura>> getDetallesByProductoIId(@PathVariable Long id_producto) {
-        List<DetalleFactura> detalles = detalleFacturaRepository.findByIdProducto(id_producto);
+        List<DetalleFactura> detalles = detalleFacturaServices.getDetalleByIdProducto(id_producto);
         if (detalles.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -82,21 +78,20 @@ public class DetalleFacturaController {
     //DELETE borrar un registro tomando el num_detalle desde la URL
     @DeleteMapping("/{num_detalle}")
     public ResponseEntity<Void> deleteDetalleFactura(@PathVariable Long num_detalle) {
-        if (!detalleFacturaRepository.existsById(num_detalle)) {
+        if (!detalleFacturaServices.existsById(num_detalle)) {
             return ResponseEntity.notFound().build();
         }
-        detalleFacturaRepository.deleteById(num_detalle);
+        detalleFacturaServices.deleteDetelle(num_detalle);
         return ResponseEntity.noContent().build();
     }
     //PUT Actualizar tomando el num_detalle desde la URL
 
     @PutMapping("/{num_detalle}")
     public ResponseEntity<DetalleFactura> updateDetalleFactura(@PathVariable Long num_detalle, @RequestBody DetalleFactura updateFactura) {
-        if (!detalleFacturaRepository.existsById(num_detalle)) {
+        if (!detalleFacturaServices.existsById(num_detalle)) {
             return ResponseEntity.notFound().build();
         }
-        updateFactura.setNum_detalle(num_detalle);
-        DetalleFactura saveDetalleFactura = detalleFacturaRepository.save(updateFactura);
-        return ResponseEntity.ok(saveDetalleFactura);
+        DetalleFactura saveCliente = detalleFacturaServices.updateDetalleFactura(num_detalle, updateFactura);
+        return ResponseEntity.ok(saveCliente);
     }
 }
